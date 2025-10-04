@@ -31,10 +31,10 @@ script = ExtResource("2_abrql")
 [node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.344357)
 shape = SubResource("SphereShape3D_sglur")
-spring_length = 0.3
-margin = 0.04
+spring_length = 6.0
 
 [node name="SpringPosition" type="Node3D" parent="SpringArmPivot/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013057709, 0, -2.276524)
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot" node_paths=PackedStringArray("spring_arm")]
 script = ExtResource("3_sglur")
