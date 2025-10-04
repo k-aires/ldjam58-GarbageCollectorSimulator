@@ -13,8 +13,11 @@ func interact() -> void:
 	pass
 
 
-func collect() -> void:
-	pass
+func collect(collection_amount: int) -> int:
+	if collection_amount > capacity:
+		collection_amount = capacity
+	capacity -= collection_amount
+	return collection_amount
 
 
 func set_capacity(value: int) -> void:
