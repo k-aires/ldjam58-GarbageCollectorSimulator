@@ -15,7 +15,10 @@ func add_to_storage(amount: int) -> int:
 
 
 func remove_from_storage(amount: int) -> int:
-	return 0
+	if amount > capacity:
+		amount = capacity
+	capacity -= amount
+	return amount
 
 
 func remove_all() -> int:
