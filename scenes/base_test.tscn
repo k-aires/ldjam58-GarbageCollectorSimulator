@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://du7b3o100uf5s"]
+
+[ext_resource type="PackedScene" uid="uid://lloy1vw3eh46" path="res://entities/player/player.tscn" id="1_pvvq1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jj5ku"]
+size = Vector2(20, 20)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pvvq1"]
+points = PackedVector3Array(-10, 0, -10, -10, 0, 10, 10, 0, -10, 10, 0, 10)
+
+[node name="BaseTest" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_jj5ku")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("ConvexPolygonShape3D_pvvq1")
+
+[node name="Player" parent="." instance=ExtResource("1_pvvq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.9795753, 0.20107792, 0, -0.20107792, 0.9795753, 0, 2.384924, 2.7549148)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.002659, 0)
+omni_range = 15.426543
