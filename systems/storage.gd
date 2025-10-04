@@ -3,7 +3,8 @@ extends Node
 
 
 @export_category("Storage Properties")
-@export_range(1, 10, 1.0, "or_greater") var max_capacity: int = 1
+@export_range(1, 10, 1.0, "or_greater") var max_capacity: int = 1 :
+	set = set_max_capacity
 
 var capacity: int = 0 :
 	set = set_capacity
@@ -29,6 +30,20 @@ func remove_from_storage(amount: int) -> int:
 
 func remove_all() -> int:
 	return capacity
+
+
+func check_empty_space() -> int:
+	return max_capacity - capacity
+
+
+func check_capacity_percentage() -> float:
+	return capacity / max_capacity
+
+
+func set_max_capacity(value: int) -> void:
+	if value <= 0:
+		value = 1
+	max_capacity = value
 
 
 func set_capacity(value: int) -> void:
