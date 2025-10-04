@@ -18,7 +18,9 @@ func collect() -> void:
 
 
 func set_capacity(value: int) -> void:
-	if value >= 0:
-		capacity = value
-	else:
+	if value > max_capacity:
+		capacity = max_capacity
+	elif value < 0:
 		capacity = 0
+	else:
+		capacity = value
