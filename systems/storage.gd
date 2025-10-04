@@ -11,7 +11,13 @@ var capacity: int = 0 :
 
 # Returns overflow
 func add_to_storage(amount: int) -> int:
-	return 0
+	var overflow: int = amount - (max_capacity - capacity)
+	if overflow > 0:
+		amount -= overflow
+	else:
+		overflow = 0
+	capacity += amount
+	return overflow
 
 
 func remove_from_storage(amount: int) -> int:
