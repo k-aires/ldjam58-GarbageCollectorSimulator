@@ -52,6 +52,7 @@ shape = SubResource("CapsuleShape3D_sglur")
 [node name="Storage" type="Node" parent="."]
 script = ExtResource("4_bls4j")
 max_capacity = 2
+used_capacity = 0
 metadata/_custom_type_script = "uid://cqvkgfiuwoyd6"
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

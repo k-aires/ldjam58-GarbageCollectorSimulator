@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 
@@ -12,6 +13,7 @@ const JUMP_VELOCITY = 4.5
 
 func _physics_process(delta: float) -> void:
 	collect()
+	get_shopping_cart()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -34,36 +36,70 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-	
-func collect() -> void:
+
+
+func _get_first_interactable_objects_for_action(
+	action: StringName,
+	group: StringName
+) -> Node3D:
 	var in_interaction_area: Array[Node3D] = area_hitbox.get_overlapping_bodies()
 	var should_process: bool = (
-			Input.is_action_just_pressed('interact') and
-			in_interaction_area and 
-			storage.check_empty_space() != 0
+			Input.is_action_just_pressed(action) and
+			in_interaction_area
 	)
 	if not should_process:
 		return
-	
+
 	var collectable_index: int = in_interaction_area.find_custom(
-			func(element: Node3D): return element.is_in_group("Collectable")
+			func(element: Node3D): return element.is_in_group(group)
 	)
-	var collectable: Node3D = in_interaction_area[collectable_index]
+	var no_collectables = collectable_index == -1
+	if no_collectables:
+		return
+
+	return in_interaction_area[collectable_index]
+
+
+func collect() -> void:
+	var should_process: bool = storage.check_empty_space() != 0
+	if not should_process:
+		return
+
+	var collectable: Node3D = _get_first_interactable_objects_for_action('interact', 'Collectable')
+	if not collectable:
+		return
 	var collectable_storage: Storage = collectable.get_storage()
 	if not collectable_storage:
 		return
-		
+
 	collectable_storage.set_used_capacity(
 			storage.add_to_storage(collectable_storage.used_capacity)
-	)	
-	
+	)
+
 	if collectable_storage.is_empty():
 		collectable.queue_free()
-	
-	
+
+
+func get_shopping_cart() -> void:
+	var collectable: Node3D = _get_first_interactable_objects_for_action('drive', 'Drivable')
+	if not collectable:
+		return
+	var collectable_storage: Storage = collectable.get_storage()
+	if not collectable_storage:
+		return
+
+	if not collectable.in_range:
+		return
+
+	storage.set_used_capacity(
+			collectable_storage.add_to_storage(storage.used_capacity)
+	)
+
+
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if "Garbage" in body.name:
+	if "Garbage" in body.name and storage.check_empty_space() != 0:
 		body.set_label(true)
+
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if "Garbage" in body.name:

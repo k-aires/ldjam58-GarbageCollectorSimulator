@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://ds0rio7qb5ayr"]
+
+[ext_resource type="Script" uid="uid://cqgmshjmccd4a" path="res://entities/interactibles/shopping_cart/shopping_cart.gd" id="1_68qlm"]
+[ext_resource type="Script" uid="uid://cqvkgfiuwoyd6" path="res://systems/storage.gd" id="2_k5rxh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3314i"]
+size = Vector3(1, 1, 1.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bngct"]
+size = Vector3(1, 1, 1.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ytlms"]
+size = Vector3(1, 1, 2.5)
+
+[node name="ShoppingCart" type="RigidBody3D" groups=["Drivable"]]
+script = ExtResource("1_68qlm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_3314i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_bngct")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="InteractionHitbox" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.460406)
+shape = SubResource("BoxShape3D_ytlms")
+
+[node name="Storage" type="Node" parent="."]
+script = ExtResource("2_k5rxh")
+max_capacity = 20
+metadata/_custom_type_script = "uid://cqvkgfiuwoyd6"
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92047447, 0)
+pixel_size = 0.01
+billboard = 2
+text = "Press \"Q\" to drive"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

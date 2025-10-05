@@ -23,7 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0180147, 0.47683108, 0)
 shape = SubResource("SphereShape3D_aqfh7")
 debug_fill = false
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." groups=["Collectable"]]
 transform = Transform3D(0.030747894, 0, -0.99952716, 0, 1, 0, 0.99952716, 0, 0.030747894, 1.0180149, 1.5060893, 4.656613e-10)
 pixel_size = 0.01
 billboard = 2
