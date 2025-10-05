@@ -1,11 +1,35 @@
 extends Node
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var total_garbage_collected: int = 0 :
+	set = set_total_garbage_collected
+var money_amount: float = 0.0 :
+	set = set_money_amount
+var garbage_value: float = 0.0 :
+	set = set_garbage_value
+# TODO: add skills
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func spend_money(amount: float) -> bool:
+	if amount <= money_amount:
+		money_amount -= amount
+		return true
+	return false
+
+
+func set_total_garbage_collected(value: int) -> void:
+	if value < 0:
+		return
+	total_garbage_collected = value
+
+
+func set_money_amount(value: float) -> void:
+	if value < 0.0:
+		return
+	money_amount = value
+
+
+func set_garbage_value(value: float) -> void:
+	if value < 0.0:
+		return
+	garbage_value = value
