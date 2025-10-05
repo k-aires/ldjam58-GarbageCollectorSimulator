@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c3e0pacbe6urx"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu2" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
