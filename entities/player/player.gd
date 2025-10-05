@@ -48,6 +48,10 @@ func collect() -> void:
 	var collectable_index: int = in_interaction_area.find_custom(
 			func(element: Node3D): return element.is_in_group("Collectable")
 	)
+	var no_collectables = collectable_index == -1
+	if no_collectables:
+		return 
+		
 	var collectable: Node3D = in_interaction_area[collectable_index]
 	var collectable_storage: Storage = collectable.get_storage()
 	if not collectable_storage:
