@@ -1,30 +1,29 @@
 [gd_scene load_steps=6 format=3 uid="uid://ds0rio7qb5ayr"]
 
 [ext_resource type="Script" uid="uid://cqgmshjmccd4a" path="res://entities/interactibles/shopping_cart/shopping_cart.gd" id="1_68qlm"]
+[ext_resource type="PackedScene" uid="uid://3ruhqwuefkm6" path="res://assets/models/shopping_cart.glb" id="2_3314i"]
 [ext_resource type="Script" uid="uid://cqvkgfiuwoyd6" path="res://systems/storage.gd" id="2_k5rxh"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_3314i"]
-size = Vector3(1, 1, 1.6)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_bngct"]
-size = Vector3(1, 1, 1.6)
+size = Vector3(0.9104614, 1.2543945, 1.5281036)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ytlms"]
-size = Vector3(1, 1, 2.5)
+size = Vector3(0.9002228, 1.3829346, 0.6980591)
 
 [node name="ShoppingCart" type="RigidBody3D" groups=["Drivable"]]
 script = ExtResource("1_68qlm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_3314i")
+[node name="shopping_cart" parent="." instance=ExtResource("2_3314i")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010040283, 0.62719727, 0.024470508)
 shape = SubResource("BoxShape3D_bngct")
 
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="InteractionHitbox" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.460406)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0050735474, 0.6845118, -0.9062195)
 shape = SubResource("BoxShape3D_ytlms")
 
 [node name="Storage" type="Node" parent="."]
@@ -33,7 +32,7 @@ max_capacity = 20
 metadata/_custom_type_script = "uid://cqvkgfiuwoyd6"
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92047447, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5535223, 0)
 pixel_size = 0.01
 billboard = 2
 text = "Press \"Q\" to drive"
