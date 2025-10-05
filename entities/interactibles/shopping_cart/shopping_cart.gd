@@ -3,7 +3,6 @@ extends RigidBody3D
 
 @onready var label: Label3D = $Label3D
 @onready var storage: Storage = $Storage
-@onready var remote_transform: RemoteTransform3D = $RemoteTransform3D
 
 func _ready() -> void:
 	set_label(false)

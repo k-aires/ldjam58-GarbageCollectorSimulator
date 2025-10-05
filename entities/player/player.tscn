@@ -21,6 +21,24 @@ shape = SubResource("ConvexPolygonShape3D_8fjmc")
 
 [node name="player" parent="." instance=ExtResource("2_fkugw")]
 
+[node name="Skeleton3D" parent="player/Bones" index="0"]
+bones/0/position = Vector3(-7.3951544e-25, -0.564456, 0.3106829)
+bones/6/rotation = Quaternion(0.37248215, 0.38111627, 0.70001453, -0.475381)
+bones/7/rotation = Quaternion(-0.29047567, -0.5920123, 0.51948255, 0.54339975)
+bones/8/rotation = Quaternion(-0.009475089, -0.042804785, 0.042042334, 0.9981535)
+bones/10/rotation = Quaternion(-0.29047567, 0.5920123, -0.51948255, 0.54339975)
+bones/11/rotation = Quaternion(-0.009475089, 0.042804778, -0.042042334, 0.9981535)
+bones/13/rotation = Quaternion(-0.76808715, -0.19749023, 0.17317395, 0.5839953)
+bones/14/rotation = Quaternion(-0.005578498, 0.0012879694, -0.0013025402, 0.9999828)
+bones/16/rotation = Quaternion(-0.76808715, 0.19749027, -0.17317393, 0.5839953)
+bones/17/rotation = Quaternion(-0.005578498, -0.0012879694, 0.0013025403, 0.9999828)
+bones/18/position = Vector3(2.3577058, -0.46421218, -0.5577283)
+bones/19/position = Vector3(1.1146251, -5.6855564, -0.72589415)
+bones/21/position = Vector3(4.7483306, 1.5218359, -0.56661)
+bones/22/position = Vector3(-2.3577058, -0.46421218, -0.5577283)
+bones/23/position = Vector3(-1.1146251, -5.6855564, -0.72589415)
+bones/25/position = Vector3(-4.7483306, 1.5218359, -0.56661)
+
 [node name="SpringArmPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1018963, 0)
 script = ExtResource("2_abrql")
@@ -29,6 +47,7 @@ script = ExtResource("2_abrql")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.344357)
 shape = SubResource("SphereShape3D_sglur")
 spring_length = 6.0
+margin = 0.2
 
 [node name="SpringPosition" type="Node3D" parent="SpringArmPivot/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013057709, 0, -2.276524)

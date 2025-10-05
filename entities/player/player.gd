@@ -7,8 +7,7 @@ extends CharacterBody3D
 @onready var storage : Storage = $Storage
 @onready var remote_transformer : RemoteTransform3D = $RemoteTransform3D
 
-
-var driving: bool = true
+var driving: bool = false
 
 
 const SPEED = 5.0
@@ -40,6 +39,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
+	rotate_player(velocity)
 	move_and_slide()
 	
 	for i in get_slide_collision_count():
@@ -48,6 +48,18 @@ func _physics_process(delta: float) -> void:
 		
 		if collider is RigidBody3D:
 			collider.apply_central_impulse(-collision.get_normal() * 0.1)
+
+
+func rotate_player(velocity) -> void:
+	if velocity.length() < 0.2:
+		return
+
+	var look_direction = Vector2(velocity.z, velocity.x)
+	$player.rotation.y = look_direction.angle()
+	$CollisionShape3D.rotation.y = look_direction.angle()
+	if driving:
+		remote_transformer.rotation.y = look_direction.angle()
+
 
 
 func _get_first_interactable_objects_for_action(
