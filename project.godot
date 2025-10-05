@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="GarbageCollectorSimulator"
-run/main_scene="uid://b22yi4yvmcx24"
+run/main_scene="uid://du7b3o100uf5s"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Collector="*res://systems/collector.gd"
 
 [editor]
 
