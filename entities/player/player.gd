@@ -76,7 +76,7 @@ func collect() -> void:
 			storage.add_to_storage(collectable_storage.used_capacity)
 	)
 
-	if collectable_storage.is_empty():
+	if collectable_storage.should_destroy():
 		collectable.queue_free()
 
 
