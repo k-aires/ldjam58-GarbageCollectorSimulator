@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://lloy1vw3eh46"]
 
 [ext_resource type="Script" uid="uid://c2qibhp178600" path="res://entities/player/player.gd" id="1_symyc"]
-[ext_resource type="Script" path="res://entities/player/camera_spring_arm.gd" id="2_abrql"]
+[ext_resource type="Script" uid="uid://c2mpcf0tsmomp" path="res://entities/player/camera_spring_arm.gd" id="2_abrql"]
 [ext_resource type="PackedScene" uid="uid://bllejk6l2l8y7" path="res://assets/models/player.glb" id="2_fkugw"]
-[ext_resource type="Script" path="res://entities/player/camera_follow.gd" id="3_sglur"]
+[ext_resource type="Script" uid="uid://c53rh8hvmsb16" path="res://entities/player/camera_follow.gd" id="3_sglur"]
 [ext_resource type="Script" uid="uid://cqvkgfiuwoyd6" path="res://systems/storage.gd" id="4_bls4j"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8fjmc"]
@@ -48,6 +48,10 @@ script = ExtResource("4_bls4j")
 max_capacity = 2
 used_capacity = 0
 metadata/_custom_type_script = "uid://cqvkgfiuwoyd6"
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("..")
+update_scale = false
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
