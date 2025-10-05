@@ -5,9 +5,9 @@ extends Node
 @export_category("Storage Properties")
 @export_range(1, 10, 1.0, "or_greater") var max_capacity: int = 1 :
 	set = set_max_capacity
-
 @export_range(0, 10, 1.0, "or_greater") var used_capacity: int = 1 :
 	set = set_used_capacity
+@export var is_destroyable: bool = true
 
 
 # Returns overflow
@@ -38,8 +38,12 @@ func check_empty_space() -> int:
 
 func check_capacity_percentage() -> float:
 	return used_capacity / max_capacity
-	
-	
+
+
+func should_destroy() -> bool:
+	return is_destroyable and is_empty()
+
+
 func is_empty() -> bool:
 	return used_capacity == 0
 
