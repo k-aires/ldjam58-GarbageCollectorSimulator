@@ -1,30 +1,25 @@
 [gd_scene load_steps=5 format=3 uid="uid://bml05fh1lf1s5"]
 
 [ext_resource type="Script" uid="uid://w3yk3n28g6t7" path="res://entities/interactibles/garbage/garbage.gd" id="1_aqfh7"]
+[ext_resource type="PackedScene" uid="uid://bfgej0u3kbd7l" path="res://assets/models/garbage_bag.glb" id="2_tsqj7"]
 [ext_resource type="Script" uid="uid://cqvkgfiuwoyd6" path="res://systems/storage.gd" id="2_vieaj"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_sdpel"]
-radial_segments = 8
-rings = 8
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_aqfh7"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tsqj7"]
+height = 1.295166
 
 [node name="Garbage" type="RigidBody3D" groups=["Collectable"]]
 transform = Transform3D(0.003263712, 0, -0.9999947, 0, 1, 0, 0.9999947, 0, 0.003263712, 0, 0, 0)
 script = ExtResource("1_aqfh7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0180147, 0.47683108, 0)
-mesh = SubResource("SphereMesh_sdpel")
-skeleton = NodePath("")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0180147, 0.47683108, 0)
-shape = SubResource("SphereShape3D_aqfh7")
-debug_fill = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67126465, 0)
+shape = SubResource("CapsuleShape3D_tsqj7")
+
+[node name="garbage_bag" parent="." instance=ExtResource("2_tsqj7")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="Label3D" type="Label3D" parent="." groups=["Collectable"]]
-transform = Transform3D(0.030747894, 0, -0.99952716, 0, 1, 0, 0.99952716, 0, 0.030747894, 1.0180149, 1.5060893, 4.656613e-10)
+transform = Transform3D(0.030747894, 0, -0.99952716, 0, 1, 0, 0.99952716, 0, 0.030747894, 0, 1.506, 0)
 pixel_size = 0.01
 billboard = 2
 text = "Press \"E\" to collect"
@@ -32,3 +27,5 @@ text = "Press \"E\" to collect"
 [node name="Storage" type="Node" parent="."]
 script = ExtResource("2_vieaj")
 metadata/_custom_type_script = "uid://cqvkgfiuwoyd6"
+
+[editable path="garbage_bag"]
