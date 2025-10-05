@@ -5,6 +5,10 @@ extends CharacterBody3D
 @onready var camera : Camera3D = $SpringArmPivot/Camera3D
 @onready var area_hitbox : Area3D = $Area3D
 @onready var storage : Storage = $Storage
+@onready var remote_transformer : RemoteTransform3D = $RemoteTransform3D
+
+
+var driving: bool = true
 
 
 const SPEED = 5.0
@@ -14,6 +18,7 @@ const JUMP_VELOCITY = 4.5
 func _physics_process(delta: float) -> void:
 	collect()
 	get_shopping_cart()
+	drive()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -36,6 +41,13 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		if collider is RigidBody3D:
+			collider.apply_central_impulse(-collision.get_normal() * 0.1)
 
 
 func _get_first_interactable_objects_for_action(
@@ -81,20 +93,38 @@ func collect() -> void:
 
 
 func get_shopping_cart() -> void:
-	var collectable: Node3D = _get_first_interactable_objects_for_action('drive', 'Drivable')
-	if not collectable:
+	var shopping_cart: Node3D = _get_first_interactable_objects_for_action('drive', 'Drivable')
+	if not shopping_cart:
 		return
-	var collectable_storage: Storage = collectable.get_storage()
-	if not collectable_storage:
+	var shopping_cart_storage: Storage = shopping_cart.get_storage()
+	if not shopping_cart_storage:
 		return
 
-	if not collectable.in_range:
+	if not shopping_cart.in_range:
 		return
 
 	storage.set_used_capacity(
-			collectable_storage.add_to_storage(storage.used_capacity)
+			shopping_cart_storage.add_to_storage(storage.used_capacity)
 	)
 
+
+func drive() -> void:
+	if not Input.is_action_just_pressed("drive"):
+		return
+	
+	if driving:
+		driving = false
+		remote_transformer.remote_path = get_path()
+		return 
+
+	var drivable: Node3D = _get_first_interactable_objects_for_action('drive', 'Drivable')
+	if not drivable:
+		return
+
+	driving = true
+	remote_transformer.remote_path = drivable.get_path()
+
+	
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if "Garbage" in body.name and storage.check_empty_space() != 0:
