@@ -20,9 +20,3 @@ func _unhandled_input(event: InputEvent) -> void:
 		spring_arm.spring_length -= 1
 	elif event.is_action_pressed("wheel_down"):
 		spring_arm.spring_length += 1
-		
-	if event.is_action_pressed('toggle_mouse_capture_actions'):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
