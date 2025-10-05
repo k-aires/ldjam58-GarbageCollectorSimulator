@@ -37,7 +37,11 @@ func _physics_process(delta: float) -> void:
 	
 func collect() -> void:
 	var in_interaction_area: Array[Node3D] = area_hitbox.get_overlapping_bodies()
-	var should_process: bool = Input.is_action_just_pressed('interact') and in_interaction_area
+	var should_process: bool = (
+			Input.is_action_just_pressed('interact') and
+			in_interaction_area and 
+			storage.check_empty_space() != 0
+	)
 	if not should_process:
 		return
 	

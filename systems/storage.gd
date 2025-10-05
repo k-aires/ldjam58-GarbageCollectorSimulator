@@ -6,7 +6,7 @@ extends Node
 @export_range(1, 10, 1.0, "or_greater") var max_capacity: int = 1 :
 	set = set_max_capacity
 
-@export_range(1, 10, 1.0, "or_greater") var used_capacity: int = 0 :
+@export_range(0, 10, 1.0, "or_greater") var used_capacity: int = 1 :
 	set = set_used_capacity
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bml05fh1lf1s5"]
 
-[ext_resource type="Script" uid="uid://w3yk3n28g6t7" path="res://entities/interactibles/garbage.gd" id="1_aqfh7"]
+[ext_resource type="Script" uid="uid://w3yk3n28g6t7" path="res://entities/interactibles/garbage/garbage.gd" id="1_aqfh7"]
 [ext_resource type="Script" uid="uid://cqvkgfiuwoyd6" path="res://systems/storage.gd" id="2_vieaj"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_sdpel"]
@@ -31,5 +31,4 @@ text = "Press \"E\" to collect"
 
 [node name="Storage" type="Node" parent="."]
 script = ExtResource("2_vieaj")
-used_capacity = 1
 metadata/_custom_type_script = "uid://cqvkgfiuwoyd6"
