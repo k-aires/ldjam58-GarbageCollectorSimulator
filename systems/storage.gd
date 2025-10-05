@@ -37,7 +37,7 @@ func check_empty_space() -> int:
 
 
 func check_capacity_percentage() -> float:
-	return used_capacity / max_capacity
+	return float(used_capacity) / float(max_capacity)
 
 
 func should_destroy() -> bool:
