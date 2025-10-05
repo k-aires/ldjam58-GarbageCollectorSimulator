@@ -4,26 +4,13 @@ extends RigidBody3D
 
 @export_group("Garbage Properties")
 @export_range(0,10,1.0,"or_greater") var max_capacity: int = 1
+@onready var label: Label3D = $Label3D
 
-var capacity: int = 1 :
-	set = set_capacity
+func _ready() -> void:
+	set_label(false)
 
+func set_label(visible: bool) -> void:
+	label.visible = visible
 
-func interact() -> void:
-	pass
-
-
-func collect(collection_amount: int) -> int:
-	if collection_amount > capacity:
-		collection_amount = capacity
-	capacity -= collection_amount
-	return collection_amount
-
-
-func set_capacity(value: int) -> void:
-	if value > max_capacity:
-		capacity = max_capacity
-	elif value < 0:
-		capacity = 0
-	else:
-		capacity = value
+func get_storage() -> Storage:
+	return $Storage

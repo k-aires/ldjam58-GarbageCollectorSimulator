@@ -2,12 +2,16 @@ extends CharacterBody3D
 
 
 @onready var camera : Camera3D = $SpringArmPivot/Camera3D
+@onready var area_hitbox : Area3D = $Area3D
+@onready var storage : Storage = $Storage
+
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 
 func _physics_process(delta: float) -> void:
+	collect()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -30,3 +34,33 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
+func collect() -> void:
+	var in_interaction_area: Array[Node3D] = area_hitbox.get_overlapping_bodies()
+	var should_process: bool = Input.is_action_just_pressed('interact') and in_interaction_area
+	if not should_process:
+		return
+	
+	var collectable_index: int = in_interaction_area.find_custom(
+			func(element: Node3D): return element.is_in_group("Collectable")
+	)
+	var collectable: Node3D = in_interaction_area[collectable_index]
+	var collectable_storage: Storage = collectable.get_storage()
+	if not collectable_storage:
+		return
+		
+	collectable_storage.set_used_capacity(
+			storage.add_to_storage(collectable_storage.used_capacity)
+	)	
+	
+	if collectable_storage.is_empty():
+		collectable.queue_free()
+	
+	
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if "Garbage" in body.name:
+		body.set_label(true)
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if "Garbage" in body.name:
+		body.set_label(false)
