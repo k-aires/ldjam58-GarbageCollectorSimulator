@@ -35,3 +35,4 @@ func on_main_menu_pressed() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = !get_tree().paused
 	get_tree().change_scene_to_file("res://ui/screens/main_menu/main_menu.tscn")
+	Collector.reset_game()

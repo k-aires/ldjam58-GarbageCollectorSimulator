@@ -103,6 +103,8 @@ func collect() -> void:
 	if collectable_storage.should_destroy():
 		collectable.queue_free()
 
+	Collector.pick_garbage("inventory", storage.used_capacity)
+
 
 func get_shopping_cart() -> void:
 	var shopping_cart: Node3D = _get_first_interactable_objects_for_action('drive', 'Drivable')
@@ -118,6 +120,9 @@ func get_shopping_cart() -> void:
 	storage.set_used_capacity(
 			shopping_cart_storage.add_to_storage(storage.used_capacity)
 	)
+	Collector.pick_garbage("cart", shopping_cart_storage.used_capacity)
+	Collector.pick_garbage("inventory", storage.used_capacity)
+
 
 
 func drive() -> void:

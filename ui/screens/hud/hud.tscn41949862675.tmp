@@ -1,0 +1,126 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc1cnd1sxeky0"]
+
+[ext_resource type="Script" uid="uid://dqx6xjba1a583" path="res://ui/screens/hud/hud.gd" id="1_7bhx6"]
+[ext_resource type="Theme" uid="uid://cp64yxigxm85p" path="res://ui/components/hud_theme.tres" id="1_k42qj"]
+[ext_resource type="Texture2D" uid="uid://dre00kh1ty54w" path="res://assets/icons/score.png" id="2_ulq3w"]
+[ext_resource type="Texture2D" uid="uid://dedcy0q2womcf" path="res://assets/icons/inventory.png" id="4_cwwf8"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7bhx6")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Score" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ScoreIcon" type="TextureRect" parent="MarginContainer/Score"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.71
+texture = ExtResource("2_ulq3w")
+expand_mode = 4
+
+[node name="ScoreCounter" type="Label" parent="MarginContainer/Score"]
+layout_mode = 2
+theme = ExtResource("1_k42qj")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "0000"
+vertical_alignment = 1
+
+[node name="Timer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="TimerLabel" type="Label" parent="MarginContainer/Timer"]
+layout_mode = 2
+theme = ExtResource("1_k42qj")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "00:00"
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Money" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="MoneyIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/Money"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MoneyCounter" type="Label" parent="MarginContainer/VBoxContainer/Money"]
+layout_mode = 2
+theme = ExtResource("1_k42qj")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "0"
+horizontal_alignment = 1
+
+[node name="Inventory2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="InventoryIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/Inventory2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = ExtResource("4_cwwf8")
+expand_mode = 1
+
+[node name="InventoryCounter" type="Label" parent="MarginContainer/VBoxContainer/Inventory2"]
+layout_mode = 2
+theme = ExtResource("1_k42qj")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "0/2"
+horizontal_alignment = 1
+
+[node name="CartInventory" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="CartInventoryIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/CartInventory"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="CartInventoryCounter" type="Label" parent="MarginContainer/VBoxContainer/CartInventory"]
+layout_mode = 2
+theme = ExtResource("1_k42qj")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "00/10"
+vertical_alignment = 1
+
+[connection signal="timeout" from="Timer" to="." method="increment_seconds"]
